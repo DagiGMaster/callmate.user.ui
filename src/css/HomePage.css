@@ -1,0 +1,27 @@
+/* HomePage.css */
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+}
+
+.section {
+  padding: 1rem;
+}
+
+.button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #0078d4;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 1rem 0;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #005ea6;
+}
