@@ -4,10 +4,13 @@
   width: 100%;
   max-width: 480px;
   margin: auto;
+  font-family: Arial, sans-serif;
 }
 
 .section {
   padding: 1rem;
+  text-align: center;
+  color: #fe7272;
 }
 
 .button {
@@ -24,4 +27,8 @@
 
 .button:hover {
   background-color: #005ea6;
+}
+
+#arrowImg {
+  width: 50%;
 }
