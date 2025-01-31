@@ -73,6 +73,11 @@
   margin-top: 20px;
 }
 
+.selectedTime {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
 .confirm-button {
   padding: 8px 15px;
   background: green;

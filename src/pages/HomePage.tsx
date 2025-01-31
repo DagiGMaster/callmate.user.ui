@@ -2,21 +2,23 @@ import React from "react";
 import "../css/HomePage.css";
 import HaircutSlider from "../components/HaircutSlider";
 import AppointmentScheduler from "../components/AppointmentScheduler";
+import EccomerceGrid from "../components/EcommerceProductGrid";
 
 const HomePage: React.FC = () => {
-  const businessName = "My Hair Stylist";
-  const avatarUrl = "/default-avatar.png"; // Replace with actual avatar logic
-
-  const bookAppointment = () => {
-    console.log("Booking appointment...");
-  };
-
   return (
-    <div className="container">
+    <div className="home-container">
+      {/* Background Video */}
+      <video autoPlay loop muted playsInline className="background-video">
+        <source src="/assets/video/bg_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
       <HaircutSlider />
-      <div className="section">
+      <div className="home-section">
         <img src="/assets/images/LOGO-1.svg" />
-        <h4>לקביעת תור ניתן לחפש תור פנוי כאן למטה</h4>
+        <span style={{ fontSize: "1.25rem" }}>
+          לקביעת תור ניתן לחפש תור פנוי כאן למטה
+        </span>
         <div className="flashing-arrow">
           <svg width="50" height="50" viewBox="0 0 100 100">
             <polygon points="50,80 20,40 80,40" fill="black">
@@ -37,6 +39,7 @@ const HomePage: React.FC = () => {
           </svg>
         </div>
         <AppointmentScheduler />
+        <EccomerceGrid />
       </div>
     </div>
   );

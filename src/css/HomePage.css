@@ -1,34 +1,38 @@
-/* HomePage.css */
-
-.container {
+.home-container {
   width: 100%;
   max-width: 480px;
   margin: auto;
   font-family: Arial, sans-serif;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
 }
 
-.section {
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.home-section {
   padding: 1rem;
   text-align: center;
-  color: #fe7272;
+  position: relative;
+  z-index: 1;
 }
 
-.button {
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  background-color: #0078d4;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 1rem 0;
-  transition: background-color 0.3s ease;
+.home-section img {
+  margin: 1.25rem 0;
 }
 
-.button:hover {
-  background-color: #005ea6;
+.home-section span {
+  color: rgb(43, 43, 43);
 }
 
-#arrowImg {
-  width: 50%;
+.flashing-arrow {
+  margin-bottom: 5rem;
 }
