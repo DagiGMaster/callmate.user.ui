@@ -57,7 +57,7 @@
 }
 
 .time-slot.available {
-  background: rgb(91, 207, 87);
+  background: rgb(98, 98, 98);
   color: white;
 }
 
@@ -99,4 +99,60 @@
 .MuiDialog-container.MuiDialog-scrollPaper.css-19do60a-MuiDialog-container {
   display: flex;
   align-items: flex-end;
+}
+
+.react-calendar {
+  width: 100% !important;
+}
+
+.days-tabs {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+}
+
+.day-tab {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.day-tab.active {
+  background-color: #333333;
+  color: white;
+}
+
+.time-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+}
+
+.time-slot {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.time-slot.available {
+  background-color: #4c9a36;
+  color: white;
+}
+
+.time-slot.unavailable {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.eyBYXM {
+  background-color: "black";
 }

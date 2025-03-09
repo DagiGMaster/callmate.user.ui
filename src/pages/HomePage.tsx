@@ -17,7 +17,7 @@ const HomePage: React.FC = () => {
       <div className="home-section">
         <img src="/assets/images/LOGO-1.svg" />
         <span style={{ fontSize: "1.25rem" }}>
-          לקביעת תור ניתן לחפש תור פנוי כאן למטה
+          לקביעת תור ניתן לחפש מועד פנוי כאן למטה
         </span>
         <div className="flashing-arrow">
           <svg width="50" height="50" viewBox="0 0 100 100">
