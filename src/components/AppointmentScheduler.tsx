@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { getNext14DaysAppointments, createAppointment } from "../api/appointmentsApi";
 import appointmentsStore from "../stores/appointmentStore";
 import TimeTab from "./TimeTab";
+import HaircutSelector from "./HaircutSelector";
 import { Appointment } from "../models/Appointment";
 import "../css/AppointmentScheduler.css";
 
@@ -18,6 +19,8 @@ const AppointmentScheduler: React.FC = observer(() => {
   const [selectedDateString, setSelectedDateString] = useState<string | null>(null);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedHaircut, setSelectedHaircut] = useState<string>("");
+  const [openHaircutDialog, setOpenHaircutDialog] = useState<boolean>(false);
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const [openSuccessDialog, setOpenSuccessDialog] = useState<boolean>(false);
   const [openErrorDialog, setOpenErrorDialog] = useState<boolean>(false);
@@ -28,6 +31,7 @@ const AppointmentScheduler: React.FC = observer(() => {
     dateString: string;
     time: string;
     formattedDate: string;
+    haircut: string;
   } | null>(null);
   
   const [days, setDays] = useState<Day[]>([]);
@@ -116,7 +120,19 @@ const AppointmentScheduler: React.FC = observer(() => {
   const handleTimeClick = (time: string): void => {
     setSelectedTime(time);
     appointmentsStore.setAppointmentTime(time);
-    setOpenDialog(true);
+    setOpenHaircutDialog(true); // Open haircut selector first
+  };
+
+  const handleHaircutSelected = (haircut: string): void => {
+    setSelectedHaircut(haircut);
+    setOpenHaircutDialog(false);
+    setOpenDialog(true); // Now open confirmation dialog
+  };
+
+  const handleHaircutDialogClose = (): void => {
+    setOpenHaircutDialog(false);
+    setSelectedTime(null); // Reset time selection
+    appointmentsStore.setAppointmentTime("");
   };
 
   // Touch/Swipe handlers
@@ -193,7 +209,8 @@ const AppointmentScheduler: React.FC = observer(() => {
     const appointmentDetails = {
       dateString: selectedDateString,
       time: selectedTime,
-      formattedDate: formattedDate
+      formattedDate: formattedDate,
+      haircut: selectedHaircut
     };
     
     setBookedAppointment(appointmentDetails);
@@ -215,7 +232,7 @@ const AppointmentScheduler: React.FC = observer(() => {
         clientName: "david",
         phoneNumber: "0534544153",
         appointmentDate: fullAppointmentDate,
-        service: "hair cut",
+        service: selectedHaircut || "hair cut", // Use selected haircut
         isDeleted: false,
         isPayed: false
       };
@@ -232,6 +249,7 @@ const AppointmentScheduler: React.FC = observer(() => {
       appointmentsStore.resetSelection();
       setSelectedDateString(null);
       setSelectedTime(null);
+      setSelectedHaircut("");
       setAvailableSlots([]);
       
       // Show success dialog (will use bookedAppointment state)
@@ -561,6 +579,14 @@ const AppointmentScheduler: React.FC = observer(() => {
         </div>
       )}
 
+      {/* Haircut Selection Dialog */}
+      <HaircutSelector
+        open={openHaircutDialog}
+        onClose={handleHaircutDialogClose}
+        onContinue={handleHaircutSelected}
+        selectedTime={selectedTime}
+      />
+
       {/* Confirmation Dialog */}
       <Dialog
         style={{ fontFamily: "Arial" }}
@@ -592,6 +618,11 @@ const AppointmentScheduler: React.FC = observer(() => {
           <p style={{ fontSize: "1.5rem", textAlign: "center" }}>
             שעה: {selectedTime}
           </p>
+          {selectedHaircut && (
+            <p style={{ fontSize: "1.2rem", textAlign: "center", color: "#4CAF50" }}>
+              תסרוקת: {selectedHaircut}
+            </p>
+          )}
           <div className="dialog-buttons">
             <button className="confirm-button" onClick={confirmAppointment}>
               כן
@@ -655,6 +686,9 @@ const AppointmentScheduler: React.FC = observer(() => {
               </p>
               <p style={{ fontSize: "1.2rem", margin: "5px 0" }}>
                 🕐 שעה: {bookedAppointment?.time || "לא זמין"}
+              </p>
+              <p style={{ fontSize: "1.2rem", margin: "5px 0" }}>
+                ✂️ תסרוקת: {bookedAppointment?.haircut || "לא זמין"}
               </p>
             </div>
             <p style={{ 
